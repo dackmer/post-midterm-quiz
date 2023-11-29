@@ -3,6 +3,7 @@ import csv, os
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
+
 class DB:
     def __init__(self):
         self.database = []
@@ -15,7 +16,8 @@ class DB:
             if table.table_name == table_name:
                 return table
         return None
-    
+
+
 import copy
 class Table:
     def __init__(self, table_name, table):
@@ -97,6 +99,78 @@ class Table:
             pivot_table.append([item, aggregate_val_list])
         return pivot_table
 
+    def insert_row(self, dict):
+        '''
+        This method inserts a dictionary, dict, into a Table object, effectively adding a row to the Table.
+        '''
+
+        table = []
+        table.append(dict)
+
+
+
+    def update_row(self, primary_attribute, primary_attribute_value, update_attribute, update_value):
+        '''
+        This method updates the current value of update_attribute to update_value
+        For example, my_table.update_row('Film', 'A Serious Man', 'Year', '2022') will change the 'Year' attribute for the 'Film'
+        'A Serious Man' from 2009 to 2022
+        '''
+        if primary_attribute:
+            return update_attribute
+        elif primary_attribute_value:
+            return update_value
+
     def __str__(self):
         return self.table_name + ':' + str(self.table)
+
+
+genre = []
+world = []
+j = 0
+all = 0
+
+with open("movies.csv", "r")as file:
+    csv_reader = csv.DictReader(file)
+    for i in csv_reader:
+        if i["Genre"] == "Comedy":
+            print(i["Worldwide Gross"])
+            j += 1
+            print(i)
+
+print(j)
+cal = 60.72 + 160.31 + 14.31 + 340.49
+# average = world / j
+print("average value of ‘Worldwide Gross’ for ‘Comedy’ movies")
+print()
+
+with open("movies.csv", "r")as file:
+    csv_reader = csv.DictReader(file)
+    for i in csv_reader:
+        if i["Audience score %"] == "41":
+            print("Find the minimum ‘Audience score %’ for ‘Drama’ movies")
+            print(f"the minimum is {i['Audience score %']}")
+
+print()
+
+fantasy = 0
+with open("movies.csv", "r")as file:
+    csv_reader = csv.DictReader(file)
+    for i in csv_reader:
+        if i["Genre"] == "Fantasy":
+            print(i)
+            fantasy += 1
+
+print("Count the number of ‘Fantasy’ movie before invoking any of the above two methods")
+print(f"Fantasy = {fantasy}")
+
+dict = {}
+dict['Film'] = 'The Shape of Water'
+dict['Genre'] = 'Fantasy'
+dict['Lead Studio'] = 'Fox'
+dict['Audience score %'] = '72'
+dict['Profitability'] = '9.765'
+dict['Rotten Tomatoes %'] = '92'
+dict['Worldwide Gross'] = '195.3'
+dict['Year'] = '2017'
+
 
